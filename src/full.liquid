@@ -1,19 +1,44 @@
 <div class="view">
-  <div class="layout layout--row layout--top">
-    <div class="grid grid--cols-2 gap--medium">
+  <div class="layout layout--col layout--stretch">
+    <div class="grid grid--cols-3 border--h-7 pb--1">
       <div class="item">
         <div class="meta"></div>
         <div class="content">
-          <div class="label label--medium">Full</div>
-          <div class="description">Replace me with your content!</div>
+          <div class="value value--medium">{{ online_count }}</div>
+          <div class="label label--medium">Online</div>
         </div>
       </div>
+      <div class="item">
+        <div class="meta"></div>
+        <div class="content">
+          <div class="value value--medium">{{ offline_count }}</div>
+          <div class="label label--medium">Offline</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="meta"></div>
+        <div class="content">
+          <div class="value value--medium">{{ needs_update_count }}</div>
+          <div class="label label--medium">Needs Update</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column stretch-y"
+      data-list-limit="true"
+      data-list-max-height="320"
+      data-list-hidden-count="true"
+      data-list-max-columns="4"
+    >
+      {% for device in devices %}
+        {% render "tailscale_device" with device: device %}
+      {% endfor %}
     </div>
   </div>
 
   <div class="title_bar">
     <img class="image" src="https://usetrmnl.com/images/brand/glyphs/glyph--black.svg" />
-    <span class="title">Plugin Template</span>
+    <span class="title">Devices Status</span>
     <span class="instance">{{ trmnl.plugin_settings.instance_name }}</span>
   </div>
 </div>

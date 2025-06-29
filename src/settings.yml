@@ -1,28 +1,30 @@
-#
-# Changes to this file will be overwritten by `trmnlp pull`.
-#
-# Docs: https://help.usetrmnl.com/en/articles/10542599-importing-and-exporting-private-plugins#h_581fb988f0
-#
 ---
 strategy: polling
 no_screen_padding: 'no'
 dark_mode: 'no'
 static_data: ''
 polling_verb: get
-polling_url: 'https://api.vercel.app/blog'
-polling_headers: 'content-type=application/json'
-name: Plugin Template
-refresh_interval: 1440
+polling_url: https://api.tailscale.com/api/v2/tailnet/{{ tailscale_org_id }}/devices?fields=default
+polling_headers: content-type=application/json&authorization=Bearer {{ tailscale_api_key }}
+polling_body: 
+id: 108109
 custom_fields:
 - keyname: author_bio
   name: About This Plugin
   field_type: author_bio
-  description: This is template text you should probably update 😁
-  github_url: https://github.com/
-  learn_more_url: https://usetrmnl.com/
-  email_address: email@example.com
-- keyname: example_string
+  description: Show the status of devices on your Tailscale network.
+  github_url: https://github.com/stephenyeargin/trmnl-tailscale
+  learn_more_url: https://tailscale.com/
+  email_address: stephen@yearg.in
+- keyname: tailscale_api_key
   field_type: string
-  name: A Configurable String
-  description: Save some data here for use in URLs or controlling the display
-  placeholder: An Example Value
+  name: Tailscale API Key
+  description: The API Key for Tailscale, available on the <a href="https://login.tailscale.com/admin/settings/keys" target="_blank" class="underline">Keys</a> page.
+  placeholder: tskey-api-xxxxxxxxxxxx-xxxxxxxxxxx
+- keyname: tailscale_org_id
+  field_type: string
+  name: Tailscale Org ID
+  description: The organization or username associated with the Tailnet as shown on <a href="https://login.tailscale.com/admin/settings/general" target="_blank" class="underline">General</a> page.
+  placeholder: myorgname.github
+name: Tailscale
+refresh_interval: 15

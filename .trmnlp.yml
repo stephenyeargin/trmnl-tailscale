@@ -7,12 +7,20 @@ watch:
   - src
 
 # values of custom fields (defined in src/settings.yml)
-custom_fields: {}
+custom_fields: {
+  tailscale_api_key: '{{ env.TAILSCALE_API_KEY }}',
+  tailscale_org_id: '{{ env.TAILSCALE_ORG_ID }}'
+}
 
 # override variables
 variables:
   trmnl: {
     plugin_settings: {
-      instance_name: 'My Instance'
+      instance_name: 'Tailscale'
+    },
+    user: {
+      time_zone: Central Time (US & Canada),
+      time_zone_iana: America/Chicago,
+      utc_offset: -18000
     }
   }

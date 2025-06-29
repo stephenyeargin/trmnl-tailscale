@@ -1,1 +1,41 @@
+{% assign online_count = 0 %}
+{% assign offline_count = 0 %}
+{% assign needs_update_count = 0 %}
+{% assign current_time = "now" | date: "%s" %}
 
+{% for device in devices %}
+  {% assign device_last_seen = device.lastSeen | date: "%s" %}
+  {% assign time_diff = current_time | minus: device_last_seen %}
+
+  {% if time_diff <= 1800 %}
+    {% assign online_count = online_count | plus: 1 %}
+  {% else %}
+    {% assign offline_count = offline_count | plus: 1 %}
+  {% endif %}
+
+  {% if device.updateAvailable %}
+    {% assign needs_update_count = needs_update_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+{% template tailscale_summary %}
+
+{% endtemplate %}
+
+{% template tailscale_device %}
+{% assign current_time = "now" | date: "%s" %}
+{% assign device_last_seen = device.lastSeen | date: "%s" %}
+{% assign time_diff = current_time | minus: device_last_seen %}
+<div class="item">
+  <div class="meta"></div>
+  <div class="content gap--xsmall">
+  <div class="label label--small label--underline">{{ device.hostname }}</div>
+    <div class="label label--small label--outline">{{ device.addresses.first }}</div>
+    {% if time_diff <= 1800 %}
+      <div class="label label--small">✓ Online{%- if device.updateAvailable %} • Update available!{% endif %}</div>
+    {% else %}
+      <div class="label label--small label--inverted">⚠︎ Offline - {{ device.lastSeen | date: "%s" | plus: trmnl.user.utc_offset | date: '%-m/%-d %-I:%M %p' }}</div>
+    {% endif %}
+  </div>
+</div>
+{% endtemplate %}
