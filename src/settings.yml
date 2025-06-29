@@ -17,7 +17,7 @@ custom_fields:
   learn_more_url: https://tailscale.com/
   email_address: stephen@yearg.in
 - keyname: tailscale_api_key
-  field_type: string
+  field_type: password
   name: Tailscale API Key
   description: The API Key for Tailscale, available on the <a href="https://login.tailscale.com/admin/settings/keys" target="_blank" class="underline">Keys</a> page.
   placeholder: tskey-api-xxxxxxxxxxxx-xxxxxxxxxxx
