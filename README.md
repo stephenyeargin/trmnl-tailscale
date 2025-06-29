@@ -1,4 +1,4 @@
-# TRMNL Plugin
+# Tailscale for TRMNL
 
 [![Build and Deploy](https://github.com/stephenyeargin/trmnl-tailscale/actions/workflows/build.yml/badge.svg)](https://github.com/stephenyeargin/trmnl-tailscale/actions/workflows/build.yml)
 
