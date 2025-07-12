@@ -1,14 +1,12 @@
-<div class="view">
-  <div class="layout layout--col layout--stretch">
-    <div class="column stretch-y"
-      data-list-limit="true"
-      data-list-max-height="220"
-      data-list-hidden-count="true"
-      data-list-max-columns="2"
-    >
-      {% for device in devices %}
-        {% render "tailscale_device" with device: device %}
-      {% endfor %}
-    </div>
+<div class="layout layout--col layout--stretch">
+  <div class="column stretch-y"
+    data-list-limit="true"
+    data-list-max-height="220"
+    data-list-hidden-count="true"
+    data-list-max-columns="2"
+  >
+    {% for device in devices %}
+      {% render "tailscale_device" with device: device %}
+    {% endfor %}
   </div>
 </div>
