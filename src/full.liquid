@@ -1,4 +1,4 @@
-<div class="layout layout--col layout--stretch">
+<div class="layout layout--col layout--top">
   <div class="grid grid--cols-3 border--h-7 pb--1">
     <div class="item">
       <div class="meta"></div>
@@ -23,15 +23,15 @@
     </div>
   </div>
 
-  <div class="column stretch-y"
-    data-list-limit="true"
-    data-list-max-height="320"
-    data-list-hidden-count="true"
-    data-list-max-columns="4"
+  <div class="columns"
+    data-overflow-max-cols="3"
+    data-overflow="true"
   >
+    <div class="column">
     {% for device in devices %}
       {% render "tailscale_device" with device: device %}
     {% endfor %}
+    </div>
   </div>
 </div>
 

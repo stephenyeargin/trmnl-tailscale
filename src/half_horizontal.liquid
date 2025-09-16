@@ -1,13 +1,14 @@
 <div class="layout layout--col">
-  <div class="column stretch-y"
-    data-list-limit="true"
-    data-list-max-height="190"
-    data-list-hidden-count="true"
-    data-list-max-columns="4"
+  <div class="columns stretch-y"
+    data-overflow-max-cols="3"
+    data-overflow="true"
+    data-overflow-counter="true"
   >
+    <div class="column">
     {% for device in devices %}
       {% render "tailscale_device" with device: device %}
     {% endfor %}
+    </div>
   </div>
 </div>
 
