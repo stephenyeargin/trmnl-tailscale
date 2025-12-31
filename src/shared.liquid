@@ -32,7 +32,7 @@
 <div class="item">
   <div class="meta"></div>
   <div class="content gap--xsmall">
-  <div class="label label--small label--underline">{{ device.hostname }}</div>
+  <div class="label label--small label--underline">{{ device.name | split: "." | first }}</div>
     <div class="label label--small label--outline">{{ device.addresses.first }}</div>
     {% if time_diff <= 1800 %}
       <div class="label label--small">✓ Online{%- if device.updateAvailable %} • Update available!{% endif %}</div>
