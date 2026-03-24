@@ -24,3 +24,22 @@ variables:
       utc_offset: -18000
     }
   }
+  # IDX_1:
+  #   devices:
+  #     - name: Device Name 1
+  #       addresses: [ 127.0.0.1 ]
+  #       lastSeen: "2026-03-24T05:16:21Z"
+  #       hostname: example1.local
+  #       online: false
+  #     - name: Device Name 2
+  #       addresses: [ 127.0.0.2 ]
+  #       lastSeen: "2026-03-24T05:16:21Z"
+  #       hostname: example3.local
+  #     - name: Device Name 3
+  #       addresses: [ 127.0.0.3 ]
+  #       lastSeen: "2025-03-24T05:16:21Z"
+  #       hostname: example3.local
+  #     - name: Device Name 4
+  #       addresses: [ 127.0.0.4 ]
+  #       lastSeen: "2026-03-24T05:16:21Z"
+  #       hostname: example4.local

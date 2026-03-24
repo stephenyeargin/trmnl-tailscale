@@ -1,25 +1,31 @@
-{% assign settings = IDX_0 %}
-{% assign devices = IDX_1.devices %}
+{% assign settings = settings | default: IDX_0 %}
+{% assign devices = devices | default: IDX_1.devices %}
 
-{% assign online_count = 0 %}
-{% assign offline_count = 0 %}
-{% assign needs_update_count = 0 %}
-{% assign current_time = "now" | date: "%s" %}
+{% assign online_count = online_count %}
+{% assign offline_count = offline_count %}
+{% assign needs_update_count = needs_update_count %}
 
-{% for device in devices %}
-  {% assign device_last_seen = device.lastSeen | date: "%s" %}
-  {% assign time_diff = current_time | minus: device_last_seen %}
+{% if online_count == nil or offline_count == nil or needs_update_count == nil %}
+  {% assign online_count = 0 %}
+  {% assign offline_count = 0 %}
+  {% assign needs_update_count = 0 %}
+  {% assign current_time = "now" | date: "%s" %}
 
-  {% if time_diff <= 1800 %}
-    {% assign online_count = online_count | plus: 1 %}
-  {% else %}
-    {% assign offline_count = offline_count | plus: 1 %}
-  {% endif %}
+  {% for device in devices %}
+    {% assign device_last_seen = device.lastSeen | date: "%s" %}
+    {% assign time_diff = current_time | minus: device_last_seen %}
 
-  {% if device.updateAvailable %}
-    {% assign needs_update_count = needs_update_count | plus: 1 %}
-  {% endif %}
-{% endfor %}
+    {% if time_diff <= 1800 %}
+      {% assign online_count = online_count | plus: 1 %}
+    {% else %}
+      {% assign offline_count = offline_count | plus: 1 %}
+    {% endif %}
+
+    {% if device.updateAvailable %}
+      {% assign needs_update_count = needs_update_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 {% template tailscale_summary %}
 
@@ -29,28 +35,36 @@
 {% assign current_time = "now" | date: "%s" %}
 {% assign device_last_seen = device.lastSeen | date: "%s" %}
 {% assign time_diff = current_time | minus: device_last_seen %}
+{% assign is_online = device.isOnline %}
+{% if is_online == nil %}
+  {% if time_diff <= 1800 %}
+    {% assign is_online = true %}
+  {% else %}
+    {% assign is_online = false %}
+  {% endif %}
+{% endif %}
 <div class="item">
   <div class="meta"></div>
-  <div class="content gap--xsmall">
-  <div class="label label--small label--underline">{{ device.name | split: "." | first }}</div>
-    <div class="label label--small label--outline">{{ device.addresses.first }}</div>
-    {% if time_diff <= 1800 %}
-      <div class="label label--small">✓ Online{%- if device.updateAvailable %} • Update available!{% endif %}</div>
+  <div class="content gap--xsmall lg:gap--small">
+  <div class="label label--small label--underline lg:label--base" data-clamp="1" data-clamp-lg="2">{{ device.name | split: "." | first }}</div>
+    <div class="label label--small label--outline lg:label--base">{{ device.addresses.first }}</div>
+    {% if is_online %}
+      <div class="label label--small lg:label--base">✓ Online{%- if device.updateAvailable %} • Update available!{% endif %}</div>
     {% else %}
-      <div class="label label--small label--inverted">⚠︎ Offline - {{ device.lastSeen | date: "%s" | plus: trmnl.user.utc_offset | date: '%-m/%-d %-I:%M %p' }}</div>
+      <div class="label label--small lg:label--base label--inverted">⚠︎ Offline - {{ device.lastSeen | date: "%s" | plus: trmnl.user.utc_offset | date: '%-m/%-d %-I:%M %p' }}</div>
     {% endif %}
   </div>
 </div>
 {% endtemplate %}
 
 {% template show_error %}
-{% if settings.size == 0 and devices == nil %}
+{% if devices == nil or devices.size == 0 %}
   <div class="py--10">
-    <span class="title title--medium">Unable to retrieve device status!</span>
+    <span class="title title--medium lg:title--large">Unable to retrieve device status!</span>
     <ul>
-      <li class="description">• Verify that you have configured devices</li>
-      <li class="description">• Verify that your API key hasn't expired</p>
-      <li class="description">• Verify that Tailscale is up (status.tailscale.com)</p>
+      <li class="description description--base lg:description--large my--2">• Verify that you have configured devices</li>
+      <li class="description description--base lg:description--large my--2">• Verify that your API key hasn't expired</p>
+      <li class="description description--base lg:description--large my--2">• Verify that Tailscale is up (status.tailscale.com)</p>
     </ul>
   </div>
 {% endif %}
