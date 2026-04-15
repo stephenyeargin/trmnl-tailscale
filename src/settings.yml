@@ -16,6 +16,7 @@ custom_fields:
 - keyname: author_bio
   name: About This Plugin
   field_type: author_bio
+  category: productivity
   description: Show the status of devices on your Tailscale network.
   github_url: https://github.com/stephenyeargin/trmnl-tailscale
   learn_more_url: https://tailscale.com/
