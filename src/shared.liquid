@@ -51,7 +51,7 @@
     {% if is_online %}
       <div class="label label--small lg:label--base">✓ Online{%- if device.updateAvailable %} • Update available!{% endif %}</div>
     {% else %}
-      <div class="label label--small lg:label--base label--inverted">⚠︎ Offline - {{ device.lastSeen | date: "%s" | plus: trmnl.user.utc_offset | date: '%-m/%-d %-I:%M %p' }}</div>
+      <div class="label label--small lg:label--base label--error">⚠︎ Offline - {{ device.lastSeen | date: "%s" | plus: trmnl.user.utc_offset | date: '%-m/%-d %-I:%M %p' }}</div>
     {% endif %}
   </div>
 </div>
