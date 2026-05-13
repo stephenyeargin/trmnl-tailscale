@@ -20,6 +20,14 @@ function transform(input) {
     };
   });
 
+  devices.sort((a, b) => {
+    if (a.isOnline !== b.isOnline) {
+      return a.isOnline ? 1 : -1;
+    }
+
+    return (a.name ?? "").localeCompare(b.name ?? "");
+  });
+
   const online_count = devices.reduce((count, device) => count + (device.isOnline ? 1 : 0), 0);
   const needs_update_count = devices.reduce((count, device) => count + (device.updateAvailable ? 1 : 0), 0);
 
