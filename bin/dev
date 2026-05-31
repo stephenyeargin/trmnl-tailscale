@@ -7,7 +7,7 @@ CONTAINER_NAME="$(basename "${ROOT_DIR}")"
 if command -v trmnlp &> /dev/null
 then
     echo "Starting trmnlp..."
-    trmnlp serve
+    dotenvx run -- trmnlp serve
     exit
 fi
 
