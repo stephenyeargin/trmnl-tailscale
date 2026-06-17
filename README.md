@@ -1,6 +1,6 @@
 # Tailscale for TRMNL
 
-[![Build and Deploy](https://github.com/stephenyeargin/trmnl-tailscale/actions/workflows/build.yml/badge.svg)](https://github.com/stephenyeargin/trmnl-tailscale/actions/workflows/build.yml)
+[![Build and Deploy](https://github.com/stephenyeargin/trmnl-tailscale/actions/workflows/build.yml/badge.svg)](https://github.com/stephenyeargin/trmnl-tailscale/actions/workflows/build.yml) [![TRMNL Recipe Connections](https://trmnl-badges.gohk.xyz/badge/connections?recipe=108109)](https://trmnl.com/recipes/108109)
 
 ![promo](assets/promo.png)
 
