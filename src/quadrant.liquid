@@ -1,14 +1,9 @@
-<div class="layout layout--col layout--stretch">
-  <div class="columns stretch-y"
-    data-overflow-max-cols="2"
-    data-overflow="true"
-    data-overflow-counter="true"
-  >
-    <div class="column">
-    {% render 'show_error', settings: settings, devices: devices %}
-    {% for device in devices %}
-      {% render "tailscale_device" with device: device %}
-    {% endfor %}
-    </div>
-  </div>
+<div class="layout layout--col">
+  {% render 'tailscale_summary', online_count: online_count, offline_count: offline_count, needs_update_count: needs_update_count %}
+</div>
+
+<div class="title_bar">
+  <img class="image image-stroke--medium" src="data:image/svg+xml;base64,{{ tailscale_svg | base64_encode }}" />
+  <span class="title">Device Status</span>
+  <span class="instance">{{ trmnl.plugin_settings.instance_name }}</span>
 </div>

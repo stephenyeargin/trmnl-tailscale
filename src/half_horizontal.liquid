@@ -1,4 +1,8 @@
 <div class="layout layout--col">
+  {% render 'tailscale_summary', online_count: online_count, offline_count: offline_count, needs_update_count: needs_update_count %}
+
+  <div class="divider"></div>
+
   <div class="columns stretch-y"
     data-overflow-max-cols="3"
     data-overflow-max-cols-lg="4"
@@ -15,7 +19,7 @@
 </div>
 
 <div class="title_bar">
-  <img class="image image-stroke" src="https://raw.githubusercontent.com/stephenyeargin/trmnl-tailscale/refs/heads/main/assets/tailscale.svg" />
+  <img class="image image-stroke--medium" src="data:image/svg+xml;base64,{{ tailscale_svg | base64_encode }}" />
   <span class="title">Device Status</span>
   <span class="instance">{{ trmnl.plugin_settings.instance_name }}</span>
 </div>
