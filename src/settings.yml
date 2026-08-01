@@ -52,4 +52,5 @@ custom_fields:
   description: The organization or username associated with the Tailnet as shown on <a href="https://login.tailscale.com/admin/settings/general" target="_blank" class="underline">General</a> page.
   placeholder: myorgname.github
 name: Tailscale
+description: Device status across a Tailscale tailnet
 refresh_interval: 15
