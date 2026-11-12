@@ -6,11 +6,10 @@ static_data: ''
 polling_verb: get
 framework_version: latest
 serverless_language: node
-polling_url: |
-  https://api.tailscale.com/api/v2/tailnet/{{ tailscale_org_id }}/settings
-  https://api.tailscale.com/api/v2/tailnet/{{ tailscale_org_id }}/devices?fields=default
+refresh_interval_floor:
+polling_url: "https://api.tailscale.com/api/v2/tailnet/{{ tailscale_org_id }}/settings\r\nhttps://api.tailscale.com/api/v2/tailnet/{{ tailscale_org_id }}/devices?fields=default\r\n"
 polling_headers: content-type=application/json&authorization=Bearer {{ tailscale_api_key }}
-polling_body: 
+polling_body: ''
 id: 108109
 oauth_enabled: 'false'
 oauth_pkce_enabled: 'no'
